@@ -1,0 +1,717 @@
+/*****************************/
+/* RESPONSIVE GRID */
+/*****************************/
+
+
+/* IFRAME */
+iframe {
+    display: block;
+    width: 80%;
+    margin: 2em auto;
+    border: none;
+}
+
+
+/*****************************/
+/* Add to cart button */
+/*****************************/
+
+.button {
+    --background: #362A89;
+    --text: #fff;
+    --cart: #fff;
+    --tick: var(--background);
+
+    position: relative;
+    border: none;
+    background: var(--background);
+    padding: 0.5em 1.75em;
+    border-radius: 0.5em;
+    cursor: pointer;
+    text-align: center;
+    min-width: 9em;
+    color: var(--text);
+    overflow: hidden;
+    transform: scale(var(--scale, 1));
+    transition: transform 0.4s cubic-bezier(.36, 1.01, .32, 1.27);
+}
+
+.button:active {
+    --scale: 0.95;
+}
+
+.button span {
+    font-size: 0.875em;
+    font-weight: 500;
+    display: block;
+    position: relative;
+    padding-left: 1.5em;
+    margin-left: -0.5em;
+    line-height: 1.625em;
+    transform: translateY(var(--span-y, 0));
+    transition: transform 0.7s ease;
+}
+
+.button span::before,
+.button span::after {
+    content: '';
+    width: var(--w, 0.125em);
+    height: var(--h, 0.875em);
+    border-radius: 0.0625em;
+    position: absolute;
+    left: var(--l, 0.5em);
+    top: var(--t, 0.375em);
+    background: currentColor;
+    transform: scale(0.75) rotate(var(--icon-r, 0deg)) translateY(var(--icon-y, 0));
+    transition: transform 0.65s ease 0.05s;
+}
+
+.button span::after {
+    --w: 0.875em;
+    --h: 0.125em;
+    --l: 0.125em;
+    --t: 0.75em;
+}
+
+.button .cart {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -0.8125em 0 0 -1.125em;
+    transform-origin: 0.75em 1.4375em;
+    transform: translateX(-7.5em) rotate(-18deg);
+}
+
+.button .cart::before,
+.button .cart::after {
+    content: '';
+    position: absolute;
+}
+
+.button .cart::before {
+    width: 0.375em;
+    height: 0.375em;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 0.125em var(--cart);
+    bottom: 0;
+    left: 0.5625em;
+    filter: drop-shadow(0.6875em 0 0 var(--cart));
+}
+
+.button .cart::after {
+    width: 1em;
+    height: 0.5625em;
+    background: var(--cart);
+    left: 0.5625em;
+    bottom: 0.4375em;
+    transform-origin: 50% 100%;
+    transform: perspective(0.25em) rotateX(-6deg) scaleY(var(--fill, 0));
+    transition: transform 1.2s ease var(--fill-d);
+}
+
+.button .cart svg {
+    z-index: 1;
+    width: 2.25em;
+    height: 1.625em;
+    display: block;
+    position: relative;
+    fill: none;
+    stroke: var(--cart);
+    stroke-width: 0.125em;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.button .cart svg polyline:last-child {
+    stroke: var(--tick);
+    stroke-dasharray: 0.625em;
+    stroke-dashoffset: var(--offset, 0.625em);
+    transition: stroke-dashoffset 0.4s ease var(--offset-d);
+}
+
+.button.loading {
+    --scale: 0.95;
+    --span-y: -2em;
+    --icon-r: 180deg;
+    --fill: 1;
+    --fill-d: 0.8s;
+    --offset: 0;
+    --offset-d: 1.73s;
+}
+
+.button.loading .cart {
+    animation: cart 3.4s linear forwards 0.2s;
+}
+
+@keyframes cart {
+    12.5% {
+        transform: translateX(-3.75em) rotate(-18deg);
+    }
+
+    25%, 45%, 55%, 75% {
+        transform: none;
+    }
+
+    50% {
+        transform: scale(0.9);
+    }
+
+    44%, 56% {
+        transform-origin: 0.75em 1.4375em;
+    }
+
+    45%, 55% {
+        transform-origin: 50% 50%;
+    }
+
+    87.5% {
+        transform: translateX(4.375em) rotate(-18deg);
+    }
+
+    100% {
+        transform: translateX(8.75em) rotate(-18deg);
+    }
+}
+
+
+/*****************************/
+/* Algemene Sections */
+/*****************************/
+
+main > section:nth-of-type(-n+7) {
+    grid-column: 1 / -1;
+}
+
+main section:nth-of-type(3),
+main section:nth-of-type(4) {
+    background-color: #f5f5f7;
+}
+
+
+/*****************************/
+/* Eerste Section */
+/*****************************/
+
+main section:first-of-type img {
+    width: 20%;
+}
+
+main section:first-of-type ul {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.2em;
+    margin: 0.2em;
+    padding: 0;
+}
+
+main section:first-of-type li {
+    list-style: none;
+    text-align: center;
+}
+
+main section:first-of-type li img {
+    width: 3.125em;
+    display: block;
+    margin: 0 auto;
+}
+
+
+/*****************************/
+/* Tweede Section */
+/*****************************/
+
+main section:nth-of-type(2) ul {
+    display: flex;
+    gap: 1.5em;
+    padding: 0;
+    list-style: none;
+}
+
+main section:nth-of-type(2) li {
+    flex: 1;
+    min-width: 0;
+    padding: 2em;
+    background-color: #f5f5f7;
+    text-align: center;
+}
+
+main section:nth-of-type(2) li img,
+main section:nth-of-type(6) li img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 2em auto 0;
+}
+
+main section:nth-of-type(2) li p,
+main section:nth-of-type(6) li p {
+    max-width: 25em;
+    margin: 1em auto;
+}
+
+
+/*****************************/
+/* Derde Section */
+/*****************************/
+
+main section:nth-of-type(3) ul {
+    display: flex;
+    justify-content: space-between;
+    gap: 7.5em;
+    padding: 0;
+}
+
+main section:nth-of-type(3) img,
+main section:nth-of-type(4) li img {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+
+main section:nth-of-type(3) li p strong + img,
+main section:nth-of-type(4) li p strong + img {
+    display: inline-block;
+    width: 2.5em;
+    height: 1.5em;
+    vertical-align: middle;
+}
+
+
+/*****************************/
+/* Kleurenknoppen */
+/*****************************/
+
+.product-colors {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8em;
+    margin-top: 1em;
+}
+
+.product-colors .color {
+    display: block;
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.color-black {
+    background-color: #333333;
+}
+
+.color-white {
+    background-color: #e8e8e8;
+}
+
+.color-blue {
+    background-color: #a7c1d9;
+}
+
+.color-purple {
+    background-color: #b8a9d1;
+}
+
+.color-pink {
+    background-color: rgb(226, 172, 201);
+}
+
+.color-yellow {
+    background-color: rgb(245, 235, 165);
+}
+
+.color-green {
+    background-color: rgb(48, 77, 20);
+}
+
+.color-darkblue {
+    background-color: cadetblue;
+}
+
+.color-purblue {
+    background-color: rgb(143, 95, 255);
+}
+
+.color-darkpink {
+    background-color: rgb(250, 129, 194);
+}
+
+.color-creme {
+    background-color: bisque;
+}
+
+.color-bordeaux {
+    background-color: rgb(104, 39, 39);
+}
+
+
+/*****************************/
+/* Vierde Section */
+/*****************************/
+
+main section:nth-of-type(4) ul {
+    gap: 3em;
+    padding: 1em;
+}
+
+main section:nth-of-type(4) li {
+    flex: 2;
+    min-width: 0;
+    padding: 3em;
+    background-color: #ffffff;
+    text-align: center;
+}
+
+main section:nth-of-type(4) h3 {
+    color: #000000;
+}
+
+
+/*****************************/
+/* Pijltjes op de afbeeldingen */
+/*****************************/
+
+main section ul li {
+    position: relative;
+}
+
+.image-arrow {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2em;
+    height: 2em;
+    background-color: #000;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+
+/*****************************/
+/* Vijfde Section */
+/*****************************/
+
+main section:nth-of-type(5) {
+    background-color: rgb(251, 251, 251);
+}
+
+main section:nth-of-type(5) img {
+    width: 120%;
+}
+
+main section:nth-of-type(5) h2,
+main section:nth-of-type(5) h3 {
+    color: #000;
+}
+
+/* Plusjes op afbeeldingen */
+.image-plus {
+    position: absolute;
+    bottom: 2em;
+    right: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.5em;
+    height: 1.5em;
+    background-color: #ffffff;
+    color: #000000;
+    border-radius: 50%;
+    font-size: 1.5em;
+    font-weight: normal;
+}
+
+/* Eerste plusje */
+.first-plus {
+    background-color: #000000;
+    color: #ffffff;
+}
+
+
+/*****************************/
+/* Zesde Section */
+/*****************************/
+
+main section:nth-of-type(6) ul {
+    display: flex;
+    gap: 1.5em;
+    padding: 0;
+    list-style: none;
+}
+
+main section:nth-of-type(6) li {
+    flex: 1;
+    min-width: 0;
+    padding: 2em;
+    background-color: #f5f5f7;
+    text-align: center;
+}
+
+main section:nth-of-type(6) li h3 {
+    font-size: 2em;
+}
+
+
+/*****************************/
+/* Zevende Section */
+/*****************************/
+
+main section:nth-of-type(7) details {
+    padding: 2em;
+    background-color: #f5f5f7;
+}
+
+main section:nth-of-type(7) details summary {
+    cursor: pointer;
+}
+
+main section:nth-of-type(7) details p {
+    display: inline-block;
+    width: 45%;
+    margin-right: 5%;
+    vertical-align: middle;
+}
+
+main section:nth-of-type(7) details img {
+    display: inline-block;
+    width: 45%;
+    vertical-align: middle;
+}
+
+
+/*****************************/
+/* Footer */
+/*****************************/
+
+footer {
+    padding: 3em 6%;
+    background-color: #f5f5f7;
+    color: #2c2c2c;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* iPhone navigatie */
+footer > section {
+    display: block;
+    padding: 3em 0;
+    background-color: transparent;
+    border-bottom: 0.0625em solid #d2d2d7;
+    text-align: left;
+}
+
+/* Kolomtitel */
+footer > section h2 {
+    margin: 0 0 1.5em;
+    color: #000000;
+    font-size: 0.9em;
+    font-weight: 600;
+    text-align: left;
+}
+
+/* Navigatie in drie kolommen */
+footer > section > ol {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 2em;
+    row-gap: 0.5em;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigatie-items */
+footer > section > ol li {
+    margin: 0;
+    color: #424245;
+    font-size: 0.85em;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: left;
+}
+
+footer > section > ol li:hover {
+    text-decoration: underline;
+}
+
+/* Footnotes */
+footer > ol {
+    display: block;
+    margin: 0 auto;
+    padding: 2em 0;
+    color: #6e6e73;
+    font-size: 0.9em;
+    line-height: 1.5;
+}
+
+footer > ol li {
+    margin-bottom: 1em;
+}
+
+
+/*****************************/
+/* Footer Details / Summary */
+/*****************************/
+
+footer details {
+    padding: 0.8em 0;
+    border-bottom: 1px solid #d2d2d7;
+}
+
+footer details summary {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+    max-width: 25em;
+    margin: 0 auto;
+    color: #424245;
+    font-size: 0.85em;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+}
+
+footer details summary::-webkit-details-marker {
+    display: none;
+}
+
+footer details summary::after {
+    content: "+";
+    color: #424245;
+    font-size: 1.3em;
+    font-weight: 400;
+}
+
+footer details[open] summary::after {
+    content: "−";
+}
+
+footer details ol {
+    display: block;
+    margin: 0;
+    padding: 0.8em 0 0;
+    list-style: none;
+}
+
+footer details ol li {
+    margin: 0;
+    color: #424245;
+    font-size: 0.85em;
+    line-height: 1.8;
+}
+
+
+/*****************************/
+/* MOBIELE WEERGAVE */
+/*****************************/
+
+@media (max-width: 37.5em) {
+
+    /* Algemene instellingen */
+    main {
+        padding: 1em;
+    }
+
+    main section {
+        padding: 1em;
+    }
+
+    img {
+        max-width: 60%;
+        height: auto;
+    }
+
+    /* Iframe */
+    iframe {
+        width: 60%;
+    }
+
+    /* Tweede, derde, vierde en zesde section */
+    main section:nth-of-type(2) ul,
+    main section:nth-of-type(3) ul,
+    main section:nth-of-type(4) ul,
+    main section:nth-of-type(6) ul {
+        flex-direction: column;
+        gap: 1em;
+    }
+
+    main section:nth-of-type(3) ul {
+        gap: 2em;
+    }
+
+    main section:nth-of-type(4) ul {
+        padding: 0;
+    }
+
+    main section:nth-of-type(4) li,
+    main section:nth-of-type(6) li {
+        padding: 1.5em;
+    }
+
+    /* Vijfde section */
+    main section:nth-of-type(5) img {
+        width: 60%;
+    }
+
+    /* Zevende section */
+    main section:nth-of-type(7) details {
+        padding: 1em;
+    }
+
+    main section:nth-of-type(7) details p,
+    main section:nth-of-type(7) details img {
+        display: block;
+        width: 100%;
+        margin: 0;
+    }
+
+    /* Plusjes */
+    .image-plus {
+        bottom: 1em;
+        right: 1em;
+    }
+
+    /* Footer */
+    footer {
+        padding: 2em 5%;
+    }
+
+    footer > section > ol {
+        grid-template-columns: 1fr;
+        row-gap: 0.5em;
+    }
+
+    footer > section h2,
+    footer > section > ol li {
+        font-size: 0.85em;
+    }
+
+    footer > ol {
+        padding: 2em 0;
+        font-size: 0.7em;
+    }
+
+    /* Footer details */
+    footer details {
+        padding: 0.9em 0;
+    }
+
+    footer details summary {
+        font-size: 0.85em;
+    }
+
+    footer details ol {
+        padding-top: 0.8em;
+    }
+
+    footer details ol li {
+        font-size: 0.85em;
+    }
+}
+
